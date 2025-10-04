@@ -1,216 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra Marathon Charity Challenge</title>
-    <style>
-        /* All your CSS unchanged */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #ffffff; color: #2c2c2c; line-height: 1.7; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); padding: 20px 40px; z-index: 1000; border-bottom: 1px solid #eaeaea; }
-        nav .logo { font-size: 1.3em; font-weight: 600; letter-spacing: -0.5px; color: #000; }
-        .hero { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Title_image.jpg'); background-size: cover; background-position: center; color: white; margin-top: 70px; }
-        .hero-content h1 { font-size: 5em; font-weight: 300; margin-bottom: 20px; letter-spacing: -2px; line-height: 1.1; }
-        .hero-content p { font-size: 1.5em; font-weight: 300; margin-bottom: 40px; opacity: 0.95; }
-        .hero-btn { display: inline-block; padding: 18px 50px; background: white; color: #000; text-decoration: none; font-weight: 500; letter-spacing: 1px; font-size: 0.9em; text-transform: uppercase; transition: all 0.3s ease; border: none; cursor: pointer; }
-        .hero-btn:hover { background: #f5f5f5; transform: translateY(-2px); }
-        .section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
-        .section-title { font-size: 3em; font-weight: 300; margin-bottom: 20px; letter-spacing: -1px; text-align: center; }
-        .section-subtitle { text-align: center; font-size: 1.2em; color: #666; margin-bottom: 80px; font-weight: 300; }
-        .stats-container { background: #f8f8f8; padding: 80px 40px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .stat-item .number { font-size: 4em; font-weight: 300; color: #000; margin-bottom: 10px; }
-        .stat-item .label { font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; color: #999; font-weight: 500; }
-        .countdown-section { background: #000; color: white; padding: 100px 40px; text-align: center; }
-        .countdown-section h2 { font-size: 3em; font-weight: 300; margin-bottom: 60px; letter-spacing: -1px; }
-        .countdown-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .time-box { min-width: 140px; }
-        .time-box .number { font-size: 5em; font-weight: 300; line-height: 1; margin-bottom: 15px; }
-        .time-box .label { font-size: 0.85em; text-transform: uppercase; letter-spacing: 2px; color: #999; font-weight: 500; }
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 80px; }
-        .content-text h3 { font-size: 2.2em; font-weight: 300; margin-bottom: 30px; letter-spacing: -1px; }
-        .content-text p { font-size: 1.1em; color: #666; line-height: 1.8; margin-bottom: 20px; }
-        .info-list { list-style: none; margin: 30px 0; }
-        .info-list li { padding: 15px 0; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; font-size: 1.05em; }
-        .info-list li strong { color: #000; font-weight: 500; }
-        .info-list li span { color: #666; }
-        .image-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .image-box { aspect-ratio: 1; background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%); display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
-        .form-section { background: #f8f8f8; padding: 100px 40px; }
-        .form-container { max-width: 700px; margin: 0 auto; }
-        .form-group { margin-bottom: 30px; }
-        .form-group label { display: block; margin-bottom: 10px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; color: #666; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px 20px; background: white; border: 1px solid #ddd; font-size: 1em; font-family: inherit; transition: border-color 0.3s; color: #2c2c2c; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #000; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .submit-btn { width: 100%; padding: 18px; background: #000; color: white; border: none; font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
-        .submit-btn:hover { background: #333; }
-        .success-message { background: #000; color: white; padding: 20px; margin-bottom: 30px; text-align: center; display: none; font-size: 0.9em; letter-spacing: 1px; }
-        .pledgers-section { padding: 100px 40px; max-width: 900px; margin: 0 auto; }
-        .pledger-item { padding: 30px 0; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: flex-start; }
-        .pledger-item:last-child { border-bottom: none; }
-        .pledger-info .name { font-size: 1.1em; font-weight: 500; margin-bottom: 8px; color: #000; }
-        .pledger-info .message { color: #666; font-style: italic; font-size: 0.95em; line-height: 1.6; }
-        .pledger-amount { font-size: 1.5em; font-weight: 300; color: #000; white-space: nowrap; margin-left: 30px; }
-        .empty-state { text-align: center; color: #999; padding: 60px 0; font-size: 1.1em; }
-        @media (max-width: 968px) { .hero-content h1 { font-size: 3em; } .content-grid { grid-template-columns: 1fr; gap: 40px; } .image-grid { grid-template-columns: 1fr; } .section { padding: 60px 20px; } .stats-container, .countdown-section, .form-section { padding: 60px 20px; } .section-title { font-size: 2.2em; } .pledger-item { flex-direction: column; } .pledger-amount { margin-left: 0; margin-top: 10px; } }
-    </style>
+<!doctype html>
+footer.note{margin-top:18px;color:var(--muted);font-size:13px}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="logo">Ultra Marathon 2026</div>
-    </nav>
+<div class="container">
+<header>
+<div class="brand">
+<div class="logo">C&amp;R</div>
+<div>
+<div style="font-weight:700">Can Cat &amp; Rob</div>
+<div class="small-muted">100km Challenge — Official start date: 14 Feb</div>
+</div>
+</div>
+<nav aria-label="Main navigation">
+<a href="#about">About</a>
+<a href="#pledge">Pledge</a>
+<a href="#updates">Updates</a>
+</nav>
+</header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Cat and Rob attempt to run Australia's hardest 100km race</h1>
-            <p>February 14, 2026</p>
-            <a href="#pledge" class="hero-btn">Make a Pledge</a>
-        </div>
-    </section>
 
-    <div class="stats-container">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="number" id="totalPledged">$0</div>
-                <div class="label">Total Pledged</div>
-            </div>
-            <div class="stat-item">
-                <div class="number" id="totalPledgers">0</div>
-                <div class="label">Supporters</div>
-            </div>
-            <div class="stat-item">
-                <div class="number" id="avgPledge">$0</div>
-                <div class="label">Average Pledge</div>
-            </div>
-        </div>
-    </div>
+<main class="hero" role="main">
+<section class="hero-left">
+<div class="eyebrow">Fundraiser & Challenge</div>
+<h1>Can Cat and Rob run Australia's hardest 100km in &lt;24 hours?</h1>
+<p class="lead">They're training hard. Support them by pledging or sending a short message — every show of support counts. We'll publish updates and a final time here.</p>
 
-    <section class="countdown-section">
-        <h2>Time Until Race Day</h2>
-        <div class="countdown-grid" id="countdownGrid">
-            <div class="time-box">
-                <div class="number" id="days">0</div>
-                <div class="label">Days</div>
-            </div>
-            <div class="time-box">
-                <div class="number" id="hours">0</div>
-                <div class="label">Hours</div>
-            </div>
-            <div class="time-box">
-                <div class="number" id="minutes">0</div>
-                <div class="label">Minutes</div>
-            </div>
-            <div class="time-box">
-                <div class="number" id="seconds">0</div>
-                <div class="label">Seconds</div>
-            </div>
-        </div>
-    </section>
 
-    <section class="section">
-        <div class="content-grid">
-            <div class="content-text">
-                <h3>The Challenge</h3>
-                <p>Oscar's 100 Hut2Hut is Australia's hardest 100km mountain race, taking runners through the unforgiving terrain of Victoria's Alpine National Park.</p>
-                <p>Starting in the pre-dawn darkness, participants face over 5,000 meters of elevation gain as they traverse exposed ridgelines, ancient hut sites, and brutal alpine climbs. With cutoff times at each checkpoint and the mountain weather adding unpredictability, finishing this race is an achievement only a small percentage of starters accomplish each year.</p>
-                <p>Cat and Rob are taking on this monumental challenge, pushing themselves to the absolute limit in one of the most demanding trail races in the country.</p>
-                <ul class="info-list">
-                    <li><strong>Race</strong> <span>Oscar's 100 Hut2Hut</span></li>
-                    <li><strong>Date</strong> <span>February 14, 2026</span></li>
-                    <li><strong>Start Time</strong> <span>5:00 AM</span></li>
-                    <li><strong>Distance</strong> <span>100 kilometers</span></li>
-                    <li><strong>Elevation Gain</strong> <span>5,800+ meters</span></li>
-                    <li><strong>Location</strong> <span>Mt Buller, Victoria</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<div class="stats" aria-hidden>
+<div class="stat"><b id="count-pledges">0</b><span class="small">Pledges</span></div>
+<div class="stat"><b id="amount-total">$0</b><span class="small">Pledged</span></div>
+<div class="stat"><b id="days">0</b><span class="small">Days to start</span></div>
+</div>
 
-    <section class="form-section" id="pledge">
-        <div class="form-container">
-            <h2 class="section-title">Make Your Pledge</h2>
-            <p class="section-subtitle">Your support fuels our mission</p>
 
-            <div style="background: #f0f0f0; padding: 30px; border-radius: 4px; margin-bottom: 40px; border-left: 4px solid #000;">
-                <h3 style="font-size: 1.2em; font-weight: 500; margin-bottom: 15px; color: #000;">How Pledges Work</h3>
-                <p style="color: #666; line-height: 1.8; margin-bottom: 10px;"><strong>If Cat and Rob complete the race:</strong> You donate your pledged amount to charity.</p>
-                <p style="color: #666; line-height: 1.8;"><strong>If they don't finish:</strong> Cat and Rob will cover your pledge amount for you—you pay nothing!</p>
-            </div>
+<div style="margin-top:18px">
+<div class="notice" id="savedNotice" hidden>Thanks — your pledge was recorded! We'll email you updates.</div>
+</div>
 
-            <div class="success-message" id="successMessage">
-                Thank you for your pledge. Your support means everything.
-            </div>
 
-            <form id="pledgeForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Pledge Amount</label>
-                    <input type="number" id="amount" min="1" required placeholder="$">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <button type="submit" class="submit-btn">Submit Pledge</button>
-            </form>
+<div style="margin-top:18px">
+<h3 id="about">About</h3>
+<p class="small-muted">This challenge covers remote trails and technical descents. Safety comes first — the goal is to reach the finish within 24 hours while staying safe and supported.</p>
+</div>
+</section>
 
-            <div id="emailStorage" style="display: none;"></div>
-        </div>
-    </section>
 
-    <section class="pledgers-section">
-        <h2 class="section-title">Our Supporters</h2>
-        <p class="section-subtitle">Thank you to everyone who believes in our mission</p>
-        <div id="pledgersList">
-            <p class="empty-state">Be the first to pledge your support</p>
-        </div>
-    </section>
+<aside class="hero-right" aria-labelledby="pledge">
+<h3 id="pledge">Make a pledge</h3>
+<form id="pledgeForm" novalidate>
+<div class="row">
+<div class="col">
+<label for="name">Full name</label>
+<input id="name" name="name" type="text" placeholder="Your name" required>
+</div>
+<div class="col">
+<label for="email">Email</label>
+<input id="email" name="email" type="email" placeholder="you@example.com" required>
+</div>
+</div>
 
-    <script>
-        let pledges = [];
-        let countdownInterval = null;
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxPliBbVmHkmk12SpIoHzhRuNKVUT70WJquI0JeKyy7H713QQIDPQKBOjCcIq2CFHK2ww/exec';
 
-        function updateCountdown() {
-            const eventDate = new Date('2026-02-14T05:00:00+11:00');
-            const now = new Date();
-            const distance = eventDate.getTime() - now.getTime();
+<label for="amount">Pledge amount (AUD)</label>
+<input id="amount" name="amount" type="number" min="1" placeholder="e.g. 50" required>
 
-            const isSameDay = eventDate.toDateString() === now.toDateString();
 
-            if (distance <= 0) {
-                if (isSameDay) {
-                    document.getElementById('countdownGrid').innerHTML = '<div class="time-box"><div class="number">Today</div><div class="label">Race Day</div></div>';
-                } else {
-                    document.getElementById('countdownGrid').innerHTML = '<div class="time-box"><div class="number">—</div><div class="label">Event Passed</div></div>';
-                }
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
-                }
-                return;
-            }
+<label for="message">Message (optional)</label>
+<textarea id="message" name="message" placeholder="Short note of encouragement"></textarea>
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-        }
+<label for="notify"><input id="notify" type="checkbox" checked> Send me updates by email</label>
 
-        function updateStats() {
-            const total = pledges.reduce((sum, p) => sum + p.amount, 0);
-            const count = pledges.length;
-            const avg = count > 0 ? Math.round(total / count) : 0;
 
-            document.getElementById('totalPledged').textContent = '$' + total.toLocaleString();
-            document.getElementById('totalPledgers').textContent =
+<input type="hidden" id="source" name="source" value="website-pledge">
+
+
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn" id="submitBtn" type="submit">Pledge now</button>
+<button type="button" id="resetBtn" style="background:#eef2ff;border-radius:10px;padding:10px 12px;border:0">Clear</button>
+</div>
+
+
+<div style="margin-top:12px" class="small-muted">Privacy: we only use your email to send updates. By pledging you agree to these terms.</div>
+</form>
+</aside>
+
+
+<div class="hero-image" style="grid-column:1/-1;margin-top:18px">
+<!-- Replace src with your own image file in the repo for faster loading -->
+<img alt="Trail running — placeholder" src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1600&auto=format&fit=crop">
+<div style="padding:10px 14px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,0.35),transparent);position:relative;bottom:56px;left:12px;border-radius:8px;display:inline-block;margin-top:-56px;">Photo: Unsplash</div>
+</div>
+</main>
+
+
+<footer class="note" aria-hidden>
+<div class="small-muted">Built for quick deployment. Replace the form endpoint (see top comments) to capture pledges into Google Sheets or your backend.</div>
+</footer>
+</div>
+
+
+<script>
