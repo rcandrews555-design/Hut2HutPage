@@ -218,14 +218,20 @@
       console.log('Submitting pledge:', pledge);
       
       try {
-        const response = await fetch(WEB_APP_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(pledge)
-        });
+const response = await fetch(WEB_APP_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(pledge)
+});
+
+const result = await response.json();
+if (result.result === 'success') {
+  console.log('Pledge saved successfully');
+} else {
+  console.error('Error response from server:', result);
+}
         
         // With no-cors mode, we can't read the response, but the request will go through
         console.log('Pledge submitted');
