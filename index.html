@@ -134,11 +134,12 @@
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwXcVOfGQGNQD-aR0ZhgS98by1bfDP7QZQ4eXMCf3UgvR4M0XIm05FBmRhAdZhIZHhqhw/exec';
 
     function updateCountdown() {
-      const eventDate = new Date('February 14, 2026 05:00:00');
+      // February 14, 2026 at 5:00 AM
+      const eventDate = new Date(2026, 1, 14, 5, 0, 0); // Month is 0-indexed, so 1 = February
       const now = new Date();
-      const distance = eventDate.getTime() - now.getTime();
+      const diff = eventDate - now;
       
-      if (distance <= 0) {
+      if (diff <= 0) {
         document.getElementById('days').textContent = '0';
         document.getElementById('hours').textContent = '0';
         document.getElementById('minutes').textContent = '0';
@@ -146,15 +147,20 @@
         return;
       }
       
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
       
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      
+      if (daysEl) daysEl.textContent = days;
+      if (hoursEl) hoursEl.textContent = hours;
+      if (minutesEl) minutesEl.textContent = minutes;
+      if (secondsEl) secondsEl.textContent = seconds;
     }
 
     async function loadPledges() {
@@ -227,15 +233,23 @@
       }
     });
 
-    // Start countdown immediately
+    // Start countdown immediately when script loads
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);
     
-    document.addEventListener('DOMContentLoaded', ()=>{
+    // Also initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        updateCountdown();
+        loadPledges();
+        setInterval(loadPledges, 60000);
+      });
+    } else {
+      // DOM already loaded
       updateCountdown();
       loadPledges();
       setInterval(loadPledges, 60000);
-    });
+    }
   </script>
 </body>
 </html>
