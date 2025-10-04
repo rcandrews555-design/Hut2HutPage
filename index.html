@@ -1,6 +1,46 @@
 <!doctype html>
-footer.note{margin-top:18px;color:var(--muted);font-size:13px}
-</style>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Can Cat & Rob — 100km Challenge</title>
+
+  <style>
+    :root {
+      --accent:#ff6b35;
+      --muted:#6b7280;
+      --bg:#f7f7f8;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:#111;
+    }
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#ff9a76,#ff6b35);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav a{margin-left:16px;color:var(--muted);text-decoration:none}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:28px}
+    @media (max-width:960px){.hero{grid-template-columns:1fr}}
+    .hero-left,.hero-right{background:#fff;border-radius:14px;padding:24px;box-shadow:0 6px 24px rgba(0,0,0,0.06)}
+    .eyebrow{color:var(--accent);font-weight:700}
+    h1{margin:8px 0 16px;font-size:clamp(28px,4vw,40px)}
+    p.lead{color:var(--muted)}
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{background:#fff;padding:10px;border-radius:10px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,0.05)}
+    .stat b{display:block;font-size:18px}
+    .small{font-size:13px;color:var(--muted)}
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea{padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+    .btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    .hero-image img{width:100%;border-radius:14px;margin-top:18px}
+    footer.note{margin-top:18px;color:var(--muted);font-size:13px}
+  </style>
 </head>
 <body>
 <div class="container">
