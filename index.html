@@ -3,200 +3,286 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Can Cat & Rob — 100km Challenge</title>
-  <meta name="description" content="Support Cat and Rob as they take on Australia's hardest 100km trail run. Make a pledge, send encouragement, and follow their journey!">
-
+  <title>Oscars100 Hut2Hut — 2026 Challenge</title>
   <style>
     :root {
-      --accent:#ff6b35;
-      --muted:#6b7280;
-      --bg:#f7f7f8;
-      --max:1100px;
+      --accent: #ff6b35;
+      --bg-light: #fafafa;
+      --bg-white: #ffffff;
+      --text-dark: #111;
+      --text-muted: #6b7280;
+      --section-gap: 80px;
+      --max-width: 900px;
     }
-    *{box-sizing:border-box}
-    body{
-      font-family:system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      margin:0;
-      background:var(--bg);
-      color:#111;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      line-height: 1.6;
     }
-    .container{max-width:var(--max);margin:0 auto;padding:28px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#ff9a76,#ff6b35);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:var(--accent)}
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header.hero {
+      background: url('hero.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 120px 20px 60px;
+      position: relative;
+    }
+    header.hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+    header.hero .head-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    header.hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      margin-bottom: 16px;
+    }
+    header.hero p {
+      font-size: 18px;
+      color: #f0f0f0;
+      margin-bottom: 32px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
 
-    .hero-image{
-      width:100%;
-      margin-top:20px;
-      position:relative;
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+      margin-bottom: var(--section-gap);
+      text-align: center;
     }
-    .hero-image img{
-      width:100%;
-      height:auto;
-      border-radius:14px;
-      object-fit:cover;
+    .stats .stat {
+      background: var(--bg-white);
+      padding: 24px 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
     }
-    .hero-image .caption{
-      position:absolute;
-      bottom:10px;
-      left:12px;
-      color:#fff;
-      background:rgba(0,0,0,0.4);
-      padding:6px 10px;
-      border-radius:8px;
-      font-size:13px;
+    .stats .stat b {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
     }
-    .hero{
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:28px;
-      align-items:start;
-      margin-top:28px;
+    .stats .stat .label {
+      font-size: 14px;
+      color: var(--text-muted);
     }
-    @media (max-width:960px){.hero{grid-template-columns:1fr}}
-    .hero-left,.hero-right{
-      background:#fff;
-      border-radius:14px;
-      padding:24px;
-      box-shadow:0 6px 24px rgba(0,0,0,0.06);
+
+    section.challenge {
+      background: var(--bg-white);
+      padding: var(--section-gap) 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      margin-bottom: var(--section-gap);
     }
-    .eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;font-size:14px}
-    h1{margin:8px 0 16px;font-size:clamp(28px,4vw,40px);line-height:1.2}
-    p.lead{color:var(--muted);font-size:16px}
-    .stats{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-    .stat{background:#fff;padding:10px 14px;border-radius:10px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,0.05)}
-    .stat b{display:block;font-size:20px}
-    .small{font-size:13px;color:var(--muted)}
-    form{display:flex;flex-direction:column;gap:12px}
-    input,textarea{padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
-    textarea{min-height:80px;resize:vertical}
-    .btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
-    .btn:hover{background:#e55f2e}
-    .notice{background:#e6ffed;border:1px solid #a7f3d0;color:#047857;padding:10px 14px;border-radius:8px;font-size:14px}
-    .small-muted{font-size:13px;color:var(--muted)}
-    footer.note{margin-top:28px;color:var(--muted);font-size:13px;text-align:center;padding-top:20px;border-top:1px solid #ddd}
+    section.challenge h2 {
+      margin-bottom: 16px;
+      font-size: 28px;
+    }
+    section.challenge ul {
+      list-style: none;
+      margin-top: 16px;
+    }
+    section.challenge ul li {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    section.pledge {
+      margin-bottom: var(--section-gap);
+    }
+    section.pledge .card {
+      background: var(--bg-white);
+      padding: var(--section-gap);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    section.pledge h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+    section.pledge form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    section.pledge form .full-width {
+      grid-column: 1 / -1;
+    }
+    section.pledge form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    section.pledge form input,
+    section.pledge form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    section.pledge form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    section.pledge form .submit-wrap {
+      text-align: center;
+      margin-top: 16px;
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 700px) {
+      section.pledge form {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-<header>
-  <div class="brand">
-    <div class="logo">C&amp;R</div>
-    <div>
-      <div style="font-weight:700">Can Cat &amp; Rob</div>
-      <div class="small-muted">100km Challenge — Official start date: 20 Feb</div>
+  <header class="hero">
+    <div class="head-content">
+      <h1>Oscars100 Hut2Hut Challenge 2026</h1>
+      <p>20–22 February 2026 | Mt Buller, VIC</p>
+      <button class="btn-primary" onclick="document.getElementById('pledge').scrollIntoView()">Make a Pledge</button>
+      <div class="stats" id="stats">
+        <div class="stat"><b id="totalPledged">$0</b><span class="label">Total Pledged</span></div>
+        <div class="stat"><b id="supporters">0</b><span class="label">Supporters</span></div>
+        <div class="stat"><b id="avgPledge">$0</b><span class="label">Average Pledge</span></div>
+        <div class="stat"><b id="countdown">0d 0h 0m</b><span class="label">Until Race Start</span></div>
+      </div>
     </div>
+  </header>
+
+  <div class="container">
+    <section class="challenge">
+      <h2>The Challenge</h2>
+      <p>The Oscars100 Hut2Hut is a 100 km loop race held during the 2026 Hut 2 Hut Weekend. The course has ~5,700 m of elevation gain, passing 10 climbs and 8 historic huts, looping from and returning to Mt Buller, Victoria.</p>
+      <ul>
+        <li>Race: Oscars100 Hut2Hut</li>
+        <li>Date: 20–22 February 2026</li>
+        <li>Distance: 100 km</li>
+        <li>Elevation Gain: ~5,700 m</li>
+        <li>Climbs: 10</li>
+        <li>Huts passed: 8</li>
+        <li>Location: Mt Buller, VIC</li>
+      </ul>
+    </section>
+
+    <section class="pledge" id="pledge">
+      <div class="card">
+        <h2>Make Your Pledge</h2>
+        <form id="pledgeForm">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="amount">Pledge Amount (AUD)</label>
+            <input type="number" id="amount" name="amount" min="1" required>
+          </div>
+          <div class="full-width">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="full-width">
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <div class="submit-wrap">
+            <button class="btn-primary" type="submit">Submit Pledge</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="supporters">
+      <h2>Supporters</h2>
+      <p>Thank you to all who pledge and encourage this challenge.</p>
+      <!-- Optionally list supporter names or messages here -->
+    </section>
   </div>
-  <nav aria-label="Main navigation">
-    <a href="#about">About</a>
-    <a href="#pledge">Pledge</a>
-    <a href="#updates">Updates</a>
-  </nav>
-</header>
 
-<div class="hero-image">
-  <img src="hero.jpg" alt="Trail running — placeholder">
-  <div class="caption">Photo: Unsplash</div>
-</div>
+  <footer>
+    &copy; 2026 Oscars100 / Hut 2 Hut
+  </footer>
 
-<main class="hero" role="main">
-  <section class="hero-left">
-    <div class="eyebrow">Fundraiser & Challenge</div>
-    <h1>Can Cat and Rob run Australia's hardest 100km in &lt;24 hours?</h1>
-    <p class="lead">They're training hard. Support them by pledging or sending a short message — every show of support counts. We'll publish updates and a final time here.</p>
+  <script>
+    // Setup countdown and stats from localStorage for demo
+    const raceStart = new Date('2026-02-20T00:00:00');
+    const statsEls = {
+      total: document.getElementById('totalPledged'),
+      supporters: document.getElementById('supporters'),
+      avg: document.getElementById('avgPledge'),
+      countdown: document.getElementById('countdown')
+    };
 
-    <div class="stats" aria-hidden="true">
-      <div class="stat"><b id="count-pledges">0</b><span class="small">Pledges</span></div>
-      <div class="stat"><b id="amount-total">$0</b><span class="small">Pledged</span></div>
-      <div class="stat"><b id="days">0</b><span class="small">Days to start</span></div>
-    </div>
-
-    <div style="margin-top:18px">
-      <div class="notice" id="savedNotice" hidden>Thanks — your pledge was recorded! We'll email you updates.</div>
-    </div>
-
-    <div style="margin-top:18px">
-      <h3 id="about">About</h3>
-      <p class="small-muted">This challenge covers remote trails and technical descents. Safety comes first — the goal is to reach the finish within 24 hours while staying safe and supported.</p>
-    </div>
-  </section>
-
-  <aside class="hero-right" aria-labelledby="pledge">
-    <h3 id="pledge">Make a pledge</h3>
-    <form id="pledgeForm" novalidate>
-      <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
-        <div class="col" style="flex:1;min-width:200px">
-          <label for="name">Full name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-        </div>
-        <div class="col" style="flex:1;min-width:200px">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-        </div>
-      </div>
-
-      <label for="amount">Pledge amount (AUD)</label>
-      <input id="amount" name="amount" type="number" min="1" placeholder="e.g. 50" required>
-
-      <label for="message">Message (optional)</label>
-      <textarea id="message" name="message" placeholder="Short note of encouragement"></textarea>
-
-      <label for="notify"><input id="notify" type="checkbox" checked> Send me updates by email</label>
-
-      <input type="hidden" id="source" name="source" value="website-pledge">
-
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <button class="btn" id="submitBtn" type="submit">Pledge now</button>
-        <button type="button" id="resetBtn" style="background:#eef2ff;border-radius:10px;padding:10px 12px;border:0;cursor:pointer">Clear</button>
-      </div>
-
-      <div style="margin-top:12px" class="small-muted">Privacy: we only use your email to send updates. By pledging you agree to these terms.</div>
-    </form>
-  </aside>
-</main>
-
-<footer class="note" aria-hidden="true">
-  <div class="small-muted">Built for quick deployment. Replace the form endpoint (see top comments) to capture pledges into Google Sheets or your backend.</div>
-</footer>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("pledgeForm");
-  const notice = document.getElementById("savedNotice");
-  const resetBtn = document.getElementById("resetBtn");
-  const submitBtn = document.getElementById("submitBtn");
-
-  const startDate = new Date("2025-02-20");
-  const today = new Date();
-  const daysToStart = Math.max(0, Math.ceil((startDate - today) / (1000*60*60*24)));
-  document.getElementById("days").textContent = daysToStart;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    try {
-      const endpoint = "YOUR_APPS_SCRIPT_URL_HERE";
-      await fetch(endpoint, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
-
-      notice.hidden = false;
-      form.reset();
-      setTimeout(() => notice.hidden = true, 5000);
-    } catch (err) {
-      alert("Error sending pledge. Please try again later.");
-      console.error(err);
-    } finally {
-      submitBtn.disabled = false;
+    function updateCountdown() {
+      const now = new Date();
+      let diff = raceStart - now;
+      if (diff < 0) diff = 0;
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hrs = Math.floor((diff / (1000*60*60)) % 24);
+      const mins = Math.floor((diff / (1000*60)) % 60);
+      statsEls.countdown.textContent = `${days}d ${hrs}h ${mins}m`;
     }
-  });
 
-  resetBtn.addEventListener("click", () => form.reset());
-});
-</script>
+    function updateStats() {
+      const arr = JSON.parse(localStorage.getItem('pledges') || '[]');
+      const total = arr.reduce((sum, p) => sum + (Number(p.amount)||0), 0);
+      statsEls.total.textContent = `$${total}`;
+      statsEls.supporters.textContent = arr.length;
+      const avg = arr.length ? Math.round(total / arr.length) : 0;
+      statsEls.avg.textContent = `$${avg}`;
+    }
+
+    document.getElementById('pledgeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const obj = Object.fromEntries(fd.entries());
+      const arr = JSON.parse(localStorage.getItem('pledges') || '[]');
+      arr.push(obj);
+      localStorage.setItem('pledges', JSON.stringify(arr));
+      updateStats();
+      alert('Thank you — your pledge was recorded!');
+      e.target.reset();
+    });
+
+    setInterval(updateCountdown, 1000);
+    setInterval(updateStats, 2000);
+    updateCountdown();
+    updateStats();
+  </script>
 </body>
 </html>
