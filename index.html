@@ -134,9 +134,10 @@
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwXcVOfGQGNQD-aR0ZhgS98by1bfDP7QZQ4eXMCf3UgvR4M0XIm05FBmRhAdZhIZHhqhw/exec';
 
     function updateCountdown() {
-      const eventDate = new Date(2026, 1, 14, 5, 0, 0);
+      const eventDate = new Date('2026-02-14T05:00:00');
       const now = new Date();
       const distance = eventDate - now;
+      
       if (distance <= 0) {
         document.getElementById('days').textContent = '0';
         document.getElementById('hours').textContent = '0';
@@ -144,10 +145,16 @@
         document.getElementById('seconds').textContent = '0';
         return;
       }
-      document.getElementById('days').textContent = Math.floor(distance / (1000*60*60*24));
-      document.getElementById('hours').textContent = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
-      document.getElementById('minutes').textContent = Math.floor((distance % (1000*60*60))/(1000*60));
-      document.getElementById('seconds').textContent = Math.floor((distance % (1000*60))/1000);
+      
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+      const seconds = Math.floor((distance % (1000*60))/1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
     }
 
     async function loadPledges() {
@@ -227,5 +234,7 @@
       setInterval(loadPledges, 60000);
     });
   </script>
+</body>
+</html>
 </body>
 </html>
