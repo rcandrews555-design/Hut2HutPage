@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Can Cat & Rob — 100km Challenge</title>
+  <meta name="description" content="Support Cat and Rob as they take on Australia's hardest 100km trail run. Make a pledge, send encouragement, and follow their journey!">
+
+  <style>
+    :root {
+      --accent:#ff6b35;
+      --muted:#6b7280;
+      --bg:#f7f7f8;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family:system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:#111;
+    }
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#ff9a76,#ff6b35);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-weight:500}
+    nav a:hover{color:var(--accent)}
+
+    .hero-image{
+      width:100%;
+      margin-top:20px;
+      position:relative;
+    }
+    .hero-image img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      object-fit:cover;
+    }
+    .hero-image .caption{
+      position:absolute;
+      bottom:10px;
+      left:12px;
+      color:#fff;
+      background:rgba(0,0,0,0.4);
+      padding:6px 10px;
+      border-radius:8px;
+      font-size:13px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:start;
+      margin-top:28px;
+    }
+    @media (max-width:960px){.hero{grid-template-columns:1fr}}
+    .hero-left,.hero-right{
+      background:#fff;
+      border-radius:14px;
+      padding:24px;
+      box-shadow:0 6px 24px rgba(0,0,0,0.06);
+    }
+    .eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;font-size:14px}
+    h1{margin:8px 0 16px;font-size:clamp(28px,4vw,40px);line-height:1.2}
+    p.lead{color:var(--muted);font-size:16px}
+    .stats{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+    .stat{background:#fff;padding:10px 14px;border-radius:10px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,0.05)}
+    .stat b{display:block;font-size:20px}
+    .small{font-size:13px;color:var(--muted)}
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea{padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+    textarea{min-height:80px;resize:vertical}
+    .btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    .btn:hover{background:#e55f2e}
+    .notice{background:#e6ffed;border:1px solid #a7f3d0;color:#047857;padding:10px 14px;border-radius:8px;font-size:14px}
+    .small-muted{font-size:13px;color:var(--muted)}
+    footer.note{margin-top:28px;color:var(--muted);font-size:13px;text-align:center;padding-top:20px;border-top:1px solid #ddd}
+  </style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="brand">
+    <div class="logo">C&amp;R</div>
+    <div>
+      <div style="font-weight:700">Can Cat &amp; Rob</div>
+      <div class="small-muted">100km Challenge — Official start date: 20 Feb</div>
+    </div>
+  </div>
+  <nav aria-label="Main navigation">
+    <a href="#about">About</a>
+    <a href="#pledge">Pledge</a>
+    <a href="#updates">Updates</a>
+  </nav>
+</header>
+
+<div class="hero-image">
+  <img src="hero.jpg" alt="Trail running — placeholder">
+  <div class="caption">Photo: Unsplash</div>
+</div>
+
+<main class="hero" role="main">
+  <section class="hero-left">
+    <div class="eyebrow">Fundraiser & Challenge</div>
+    <h1>Can Cat and Rob run Australia's hardest 100km in &lt;24 hours?</h1>
+    <p class="lead">They're training hard. Support them by pledging or sending a short message — every show of support counts. We'll publish updates and a final time here.</p>
+
+    <div class="stats" aria-hidden="true">
+      <div class="stat"><b id="count-pledges">0</b><span class="small">Pledges</span></div>
+      <div class="stat"><b id="amount-total">$0</b><span class="small">Pledged</span></div>
+      <div class="stat"><b id="days">0</b><span class="small">Days to start</span></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="notice" id="savedNotice" hidden>Thanks — your pledge was recorded! We'll email you updates.</div>
+    </div>
+
+    <div style="margin-top:18px">
+      <h3 id="about">About</h3>
+      <p class="small-muted">This challenge covers remote trails and technical descents. Safety comes first — the goal is to reach the finish within 24 hours while staying safe and supported.</p>
+    </div>
+  </section>
+
+  <aside class="hero-right" aria-labelledby="pledge">
+    <h3 id="pledge">Make a pledge</h3>
+    <form id="pledgeForm" novalidate>
+      <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+        <div class="col" style="flex:1;min-width:200px">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="col" style="flex:1;min-width:200px">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <label for="amount">Pledge amount (AUD)</label>
+      <input id="amount" name="amount" type="number" min="1" placeholder="e.g. 50" required>
+
+      <label for="message">Message (optional)</label>
+      <textarea id="message" name="message" placeholder="Short note of encouragement"></textarea>
+
+      <label for="notify"><input id="notify" type="checkbox" checked> Send me updates by email</label>
+
+      <input type="hidden" id="source" name="source" value="website-pledge">
+
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn" id="submitBtn" type="submit">Pledge now</button>
+        <button type="button" id="resetBtn" style="background:#eef2ff;border-radius:10px;padding:10px 12px;border:0;cursor:pointer">Clear</button>
+      </div>
+
+      <div style="margin-top:12px" class="small-muted">Privacy: we only use your email to send updates. By pledging you agree to these terms.</div>
+    </form>
+  </aside>
+</main>
+
+<footer class="note" aria-hidden="true">
+  <div class="small-muted">Built for quick deployment. Replace the form endpoint (see top comments) to capture pledges into Google Sheets or your backend.</div>
+</footer>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("pledgeForm");
+  const notice = document.getElementById("savedNotice");
+  const resetBtn = document.getElementById("resetBtn");
+  const submitBtn = document.getElementById("submitBtn");
+
+  const startDate = new Date("2025-02-20");
+  const today = new Date();
+  const daysToStart = Math.max(0, Math.ceil((startDate - today) / (1000*60*60*24)));
+  document.getElementById("days").textContent = daysToStart;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const endpoint = "YOUR_APPS_SCRIPT_URL_HERE";
+      await fetch(endpoint, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
+
+      notice.hidden = false;
+      form.reset();
+      setTimeout(() => notice.hidden = true, 5000);
+    } catch (err) {
+      alert("Error sending pledge. Please try again later.");
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  resetBtn.addEventListener("click", () => form.reset());
+});
+</script>
+</body>
+</html>
